@@ -137,10 +137,13 @@ I_Shape.prototype = new Shape();
 function J_Shape(center) {
 
 	// TU CÓDIGO AQUÍ: Para programar J_Shape toma como ejemplo el código de la clase I_Shape
-	var coords = [new Point(center.x - 2, center.y),
-		new Point(center.x - 1, center.y),
-		new Point(center.x , center.y),
-		new Point(center.x, center.y-1)];
+	var coords = [new Point(center.x - 1, center.y),
+		new Point(center.x, center.y),
+		new Point(center.x +1, center.y),
+		new Point(center.x+1, center.y+1)];
+
+	Shape.prototype.init.call(this, coords, "orange");
+
 
 }
 
@@ -151,10 +154,13 @@ J_Shape.prototype = new Shape();
 function L_Shape(center) {
 
 	// TU CÓDIGO AQUÍ: Para programar L_Shape toma como ejemplo el código de la clase I_Shape
-	var coords = [new Point(center.x - 2, center.y-1),
-		new Point(center.x - 2, center.y),
-		new Point(center.x -1, center.y),
-		new Point(center.x, center.y)];
+	var coords = [new Point(center.x - 1, center.y+1),
+		new Point(center.x - 1, center.y),
+		new Point(center.x, center.y),
+		new Point(center.x+1, center.y)];
+
+	Shape.prototype.init.call(this, coords, "cyan");
+
 }
 // TU CÓDIGO AQUÍ: La clase L_Shape hereda de la clase Shape
 L_Shape.prototype = new Shape();
@@ -164,10 +170,13 @@ L_Shape.prototype = new Shape();
 function O_Shape(center) {
 
 	// TU CÓDIGO AQUÍ: Para programar O_Shape toma como ejemplo el código de la clase I_Shape
-	var coords = [new Point(center.x - 2, center.y1),
-		new Point(center.x - 1, center.y),
-		new Point(center.x -1, center.y-1),
-		new Point(center.x-2, center.y-1)];
+	var coords = [new Point(center.x-1, center.y),
+		new Point(center.x , center.y),
+		new Point(center.x, center.y+1),
+		new Point(center.x-1, center.y+1)];
+
+	Shape.prototype.init.call(this, coords, "red");
+
 
 }
 
@@ -178,10 +187,13 @@ O_Shape.prototype = new Shape();
 function S_Shape(center) {
 
 	// TU CÓDIGO AQUÍ: Para programar S_Shape toma como ejemplo el código de la clase I_Shape 
-	var coords = [new Point(center.x - 2, center.y-1),
-		new Point(center.x - 1, center.y-1),
-		new Point(center.x -1, center.y),
-		new Point(center.x, center.y)];
+	var coords = [new Point(center.x - 1, center.y+1),
+		new Point(center.x, center.y+1),
+		new Point(center.x , center.y),
+		new Point(center.x+1, center.y)];
+
+	Shape.prototype.init.call(this, coords, "green");
+
 }
 
 // TU CÓDIGO AQUÍ: La clase S_Shape hereda de la clase Shape
@@ -191,10 +203,13 @@ S_Shape.prototype = new Shape();
 function T_Shape(center) {
 
 	// TU CÓDIGO AQUÍ: : Para programar T_Shape toma como ejemplo el código de la clase I_Shape
-	var coords = [new Point(center.x - 2, center.y),
-		new Point(center.x - 1, center.y),
-		new Point(center.x, center.y),
-		new Point(center.x-1, center.y-1)];
+	var coords = [new Point(center.x - 1, center.y),
+		new Point(center.x , center.y),
+		new Point(center.x+1, center.y),
+		new Point(center.x, center.y+1)];
+
+	Shape.prototype.init.call(this, coords, "yellow");
+
 }
 
 // TU CÓDIGO AQUÍ: La clase T_Shape hereda de la clase Shape
@@ -205,10 +220,13 @@ T_Shape.prototype = new Shape();
 function Z_Shape(center) {
 
 	// TU CÓDIGO AQUÍ: : Para programar Z_Shape toma como ejemplo el código de la clase I_Shape
-	var coords = [new Point(center.x - 2, center.y),
-		new Point(center.x - 1, center.y),
-		new Point(center.x-1, center.y-1),
-		new Point(center.x, center.y-1)];
+	var coords = [new Point(center.x - 1, center.y),
+		new Point(center.x, center.y),
+		new Point(center.x, center.y+1),
+		new Point(center.x+1, center.y+1)];
+
+	Shape.prototype.init.call(this, coords, "magenta");
+
 }
 
 // TU CÓDIGO AQUÍ: La clase Z_Shape hereda de la clase Shape
