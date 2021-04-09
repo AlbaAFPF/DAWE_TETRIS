@@ -91,34 +91,49 @@ function I_Shape(center) {
 }
 
 // TU CÓDIGO AQUÍ: La clase I_Shape hereda de la clase Shape
+I_Shape.prototype = new Shape();
 
 
 // =============== J_Shape =============================
 function J_Shape(center) {
 
 	// TU CÓDIGO AQUÍ: Para programar J_Shape toma como ejemplo el código de la clase I_Shape
+	var coords = [new Point(center.x - 2, center.y),
+		new Point(center.x - 1, center.y),
+		new Point(center.x , center.y),
+		new Point(center.x, center.y-1)];
 
 }
 
 // TU CÓDIGO AQUÍ: La clase J_Shape hereda de la clase Shape
+J_Shape.prototype = new Shape();
 
 // ============ L Shape ===========================
 function L_Shape(center) {
 
 	// TU CÓDIGO AQUÍ: Para programar L_Shape toma como ejemplo el código de la clase I_Shape
+	var coords = [new Point(center.x - 2, center.y-1),
+		new Point(center.x - 2, center.y),
+		new Point(center.x -1, center.y),
+		new Point(center.x, center.y)];
 }
-
 // TU CÓDIGO AQUÍ: La clase L_Shape hereda de la clase Shape
+L_Shape.prototype = new Shape();
 
 
 // ============ O Shape ===========================
 function O_Shape(center) {
 
 	// TU CÓDIGO AQUÍ: Para programar O_Shape toma como ejemplo el código de la clase I_Shape
+	var coords = [new Point(center.x - 2, center.y),
+		new Point(center.x - 1, center.y),
+		new Point(center.x -1, center.y-1),
+		new Point(center.x-2, center.y-1)];
 
 }
         
 // TU CÓDIGO AQUÍ: La clase O_Shape hereda de la clase Shape
+O_Shape.prototype = new Shape();
 
 // ============ S Shape ===========================
 function S_Shape(center) {

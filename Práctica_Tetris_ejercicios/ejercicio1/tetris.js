@@ -4,6 +4,7 @@
 
 // ============== Point =======================
 
+// Representa la posición (x,y) de un punto en pantalla
 function Point (x, y) {
 	this.x = x;
 	this.y = y;    
@@ -28,6 +29,16 @@ Rectangle.prototype.draw = function() {
 	// la anchura y altura actual y una línea de anchura=lineWidth. Ten en cuenta que 
 	// en este ejemplo la variable ctx es global y que guarda el contexto (context) 
 	// para pintar en el canvas.
+
+	// Rectángulo
+	ctx.fillStyle = this.color;
+	ctx.fillRect(this.px, this.py, this.width, this.height);
+	// Contorno del cuadrado
+	ctx.strokeStyle = "black";
+	ctx.lineWidth = this.lineWidth;
+	ctx.strokeRect(this.px, this.py, this.width, this.height);
+
+
 }
 
 
@@ -38,8 +49,8 @@ Rectangle.prototype.setFill = function(color) { this.color = color}
 
 function Block (pos, color) {
 
-
-	// TU CÓDIGO AQUÍ: este es el constructor de la clase Block. Recibe dos parámetros, pos y color. Pos = posición de la celda, por ejemplo, (9,19).
+	// TU CÓDIGO AQUÍ: este es el constructor de la clase Block. Recibe dos parámetros,
+	// pos y color. Pos = posición de la celda, por ejemplo, (9,19).
 	// color = color que hay que emplear para pintar el bloque.
 	// Internamente este método crea dos puntos (empleando las coordenadas del pixel)
 	// y llama al método init de la clase Rectangle, pasándole como parámetro,
@@ -47,14 +58,30 @@ function Block (pos, color) {
 	// Sería interesante que emplearas las constantes Block.BLOCK_SIZE y Block.OUTLINE_WIDTH,
 	// para establecer la anchura del bloque y la anchura de la línea.
 
+
+	// Cogemos las posiciones
+	this.x = pos.x;
+	this.y = pos.y;
+	// Y el color
+	this.color = color;
+
+	// Llamamos al método init de la clase Rectangle
+	var p1 = new Point((this.x*Block.BLOCK_SIZE), (this.y*Block.BLOCK_SIZE));
+	var p2 = new Point(((this.x+1)*Block.BLOCK_SIZE), ((this.y+1)*Block.BLOCK_SIZE));
+
+	this.init(p1,p2);
+	this.setLineWidth(Block.OUTLINE_WIDTH);
+	this.setFill(color);
+
 }
-
-
 
 Block.BLOCK_SIZE = 30;
 Block.OUTLINE_WIDTH = 2;
 
 // TU CÓDIGO: emplea el patrón de herencia (Block es un Rectangle)
+
+// Block hereda de Rectangle
+Block.prototype = new Rectangle();
 
 
 
