@@ -399,9 +399,6 @@ Tetris.prototype.do_move = function(direction) {
 	// obtendrás el desplazamiento (dx, dy). A continuación analiza si la pieza actual 
 	// se puede mover con ese desplazamiento. En caso afirmativo, mueve la pieza.
 
-	//Tetris.DIRECTION = {'Left':[-1, 0], 'Right':[1, 0], 'Down':[0, 1]};
-
-
 	var punto = Tetris.DIRECTION[direction];
 	if (this.current_shape.can_move(this.board, punto[0], punto[1])){
 		this.current_shape.move(punto[0], punto[1]);

@@ -118,6 +118,8 @@ Block.prototype.can_move = function(board, dx, dy) {
   // e indica si es posible mover el bloque actual si 
  // incrementáramos su posición en ese valor
 
+	return board.can_move(this.x+dx, this.y+dy);
+
 }
 
 
@@ -158,8 +160,15 @@ Shape.prototype.draw = function() {
  ***************************************************/
 
 Shape.prototype.can_move = function(board, dx, dy) {
-
+	//this.current_shape.length
 // TU CÓDIGO AQUÍ: comprobar límites para cada bloque de la pieza
+
+	for(var i=0; i<this.blocks.length; i++){
+		if(this.blocks[i].can_move(board,dx,dy) == false){
+			return false;
+		}
+	}
+	return true;
 };
 
 /* Método introducido en el EJERCICIO 4 */
@@ -319,7 +328,16 @@ Board.prototype.can_move = function(x,y){
  	// hasta ahora, este método siempre devolvía el valor true. Ahora,
  	// comprueba si la posición que se le pasa como párametro está dentro de los  
 	// límites del tablero y en función de ello, devuelve true o false.
-	return true;
+
+	// El tablero se compone de 10x20 casillas. La casilla
+	// de la esquina superior izquierda tiene coordenadas (0,0) y la casilla de la esquina inferior derecha
+	// tiene coordenadas (9,19).
+
+	if(x<0 || x>9 || y<0 || y>19){
+		return false;
+	}else{
+		return true;
+	}
 };
 
 // ==================== Tetris ==========================
@@ -340,6 +358,14 @@ Tetris.prototype.create_new_shape = function(){
 	// Elegir un nombre de pieza al azar del array Tetris.SHAPES
 	// Crear una instancia de ese tipo de pieza (x = centro del tablero, y = 0)
 	// Devolver la referencia de esa pieza nueva
+
+	// Elegir pieza al azar
+	var randomId = Math.floor(Math.random() * Tetris.SHAPES.length);
+	console.log(randomId)
+	var piezaRandom = Tetris.SHAPES[randomId];
+	// Crear instancia de la pieza al azar
+	var pieza = new piezaRandom(new Point(parseInt(Tetris.BOARD_WIDTH/2), 0));
+	return pieza;
 }
 
 Tetris.prototype.init = function(){
@@ -360,6 +386,9 @@ Tetris.prototype.init = function(){
 	// Pintar la pieza actual en el tablero
 	// Aclaración: (Board tiene un método para pintar)
 
+	this.board.draw_shape(this.current_shape);
+
+
 }
 
 Tetris.prototype.key_pressed = function(e) { 
@@ -371,6 +400,25 @@ Tetris.prototype.key_pressed = function(e) {
 	// ha pulsado el usuario. ¿Cuál es el código key que corresponde 
 	// a mover la pieza hacia la izquierda, la derecha, abajo o a rotarla?
 
+	var charTyped = String.fromCharCode(key);
+
+	console.log("Character typed: " + key);
+
+	switch (key){
+		case 37:
+			//izq
+			this.do_move('Left');
+			break;
+		case 39:
+			//de
+			this.do_move('Right');
+			break;
+		case 40:
+			//abajo
+			this.do_move('Down');
+			break;
+	}
+
 
 }
 
@@ -381,6 +429,11 @@ Tetris.prototype.do_move = function(direction) {
 	// a esa tecla. Recuerda que el array Tetris.DIRECTION guarda los desplazamientos 
 	// en cada dirección, por tanto, si accedes a Tetris.DIRECTION[direction], 
 	// obtendrás el desplazamiento (dx, dy). A continuación analiza si la pieza actual 
-	// se puede mover con ese desplazamiento. En caso afirmativo, mueve la pieza. 
+	// se puede mover con ese desplazamiento. En caso afirmativo, mueve la pieza.
+
+	var punto = Tetris.DIRECTION[direction];
+	if (this.current_shape.can_move(this.board, punto[0], punto[1])){
+		this.current_shape.move(punto[0], punto[1]);
+	}
        
 }
