@@ -160,7 +160,6 @@ Shape.prototype.draw = function() {
  ***************************************************/
 
 Shape.prototype.can_move = function(board, dx, dy) {
-	//this.current_shape.length
 // TU CÓDIGO AQUÍ: comprobar límites para cada bloque de la pieza
 
 	for(var i=0; i<this.blocks.length; i++){
