@@ -89,15 +89,12 @@ function Block (pos, color) {
 	this.init(p1,p2);
 	this.setLineWidth(Block.OUTLINE_WIDTH);
 	this.setFill(color);
-
-
 }
 
 Block.BLOCK_SIZE = 30;
 Block.OUTLINE_WIDTH = 2;
 
 // TU CÓDIGO AQUÍ: emplea el patrón de herencia (Block es un Rectangle)
-
 
 // Block hereda de Rectangle
 Block.prototype = new Rectangle();
@@ -287,18 +284,8 @@ function Board(width, height) {
 // Si la pieza nueva puede entrar en el tablero, pintarla y devolver true.
 // Si no, devoler false
 
-/*  ORIGINAL
 Board.prototype.draw_shape = function(shape){
 	if (shape.can_move(this,0,0)){
-		shape.draw();
-		return true;
-	}
-	return false;
-}
- */
-
-Board.prototype.draw_shape = function(shape){
-	if (this.can_move(0,0)){
 		shape.draw();
 		return true;
 	}
