@@ -1,10 +1,8 @@
 // ************************************
 // *     EJERCICIO 1                   *
 // ************************************
-
 // ============== Point =======================
 
-// Representa la posición (x,y) de un punto en pantalla
 function Point (x, y) {
 	this.x = x;
 	this.y = y;
@@ -37,8 +35,6 @@ Rectangle.prototype.draw = function() {
 	ctx.strokeStyle = "black";
 	ctx.lineWidth = this.lineWidth;
 	ctx.strokeRect(this.px, this.py, this.width, this.height);
-
-
 }
 
 
@@ -49,15 +45,13 @@ Rectangle.prototype.setFill = function(color) { this.color = color}
 
 function Block (pos, color) {
 
-	// TU CÓDIGO AQUÍ: este es el constructor de la clase Block. Recibe dos parámetros,
-	// pos y color. Pos = posición de la celda, por ejemplo, (9,19).
+	// TU CÓDIGO AQUÍ: este es el constructor de la clase Block. Recibe dos parámetros, pos y color. Pos = posición de la casilla, por ejemplo, (9,19).
 	// color = color que hay que emplear para pintar el bloque.
 	// Internamente este método crea dos puntos (empleando las coordenadas del pixel)
 	// y llama al método init de la clase Rectangle, pasándole como parámetro,
 	// estos dos puntos.
 	// Sería interesante que emplearas las constantes Block.BLOCK_SIZE y Block.OUTLINE_WIDTH,
-	// para establecer la anchura del bloque y la anchura de la línea.
-
+	// para establecer la anchura del bloque y la anchura de la línea, respectivamente.
 
 	// Cogemos las posiciones
 	this.x = pos.x;
@@ -72,13 +66,12 @@ function Block (pos, color) {
 	this.init(p1,p2);
 	this.setLineWidth(Block.OUTLINE_WIDTH);
 	this.setFill(color);
-
 }
 
 Block.BLOCK_SIZE = 30;
 Block.OUTLINE_WIDTH = 2;
 
-// TU CÓDIGO: emplea el patrón de herencia (Block es un Rectangle)
+// TU CÓDIGO AQUÍ: emplea el patrón de herencia (Block es un Rectangle)
 
 // Block hereda de Rectangle
 Block.prototype = new Rectangle();
@@ -87,8 +80,6 @@ Block.prototype = new Rectangle();
 // ************************************
 // *      EJERCICIO 2                  *
 // ************************************
-
-// ============== Shape ===================================
 
 function Shape() {}
 
@@ -105,7 +96,6 @@ Shape.prototype.init = function(coords, color) {
 	for(let i=0; i < coords.length; i++){
 		this.blocks.push(new Block(new Point(coords[i].x,coords[i].y), color));
 	}
-
 };
 
 Shape.prototype.draw = function() {
@@ -115,7 +105,12 @@ Shape.prototype.draw = function() {
 	for(let i=0; i < this.blocks.length; i++){
 		this.blocks[i].draw();
 	}
+};
 
+// Por ahora, siempre devolverá true
+
+Shape.prototype.can_move = function(board, dx, dy) {
+	return true;
 };
 
 // ============= I_Shape ================================
@@ -143,8 +138,6 @@ function J_Shape(center) {
 		new Point(center.x+1, center.y+1)];
 
 	Shape.prototype.init.call(this, coords, "orange");
-
-
 }
 
 // TU CÓDIGO AQUÍ: La clase J_Shape hereda de la clase Shape
@@ -161,7 +154,9 @@ function L_Shape(center) {
 
 	Shape.prototype.init.call(this, coords, "cyan");
 
+
 }
+
 // TU CÓDIGO AQUÍ: La clase L_Shape hereda de la clase Shape
 L_Shape.prototype = new Shape();
 
@@ -176,12 +171,11 @@ function O_Shape(center) {
 		new Point(center.x-1, center.y+1)];
 
 	Shape.prototype.init.call(this, coords, "red");
-
-
 }
 
 // TU CÓDIGO AQUÍ: La clase O_Shape hereda de la clase Shape
 O_Shape.prototype = new Shape();
+
 
 // ============ S Shape ===========================
 function S_Shape(center) {
@@ -192,9 +186,7 @@ function S_Shape(center) {
 		new Point(center.x , center.y),
 		new Point(center.x+1, center.y)];
 
-	Shape.prototype.init.call(this, coords, "green");
-
-}
+	Shape.prototype.init.call(this, coords, "green");}
 
 // TU CÓDIGO AQUÍ: La clase S_Shape hereda de la clase Shape
 S_Shape.prototype = new Shape();
@@ -209,7 +201,6 @@ function T_Shape(center) {
 		new Point(center.x, center.y+1)];
 
 	Shape.prototype.init.call(this, coords, "yellow");
-
 }
 
 // TU CÓDIGO AQUÍ: La clase T_Shape hereda de la clase Shape
@@ -226,12 +217,10 @@ function Z_Shape(center) {
 		new Point(center.x+1, center.y+1)];
 
 	Shape.prototype.init.call(this, coords, "magenta");
-
 }
 
 // TU CÓDIGO AQUÍ: La clase Z_Shape hereda de la clase Shape
 Z_Shape.prototype = new Shape();
-
 
 
 // ************************************
@@ -249,7 +238,7 @@ function Board(width, height) {
 // Si no, devoler false
 
 
-/*  ORIGINAL
+
 Board.prototype.draw_shape = function(shape){
 	if (shape.can_move(this,0,0)){
 		shape.draw();
@@ -257,16 +246,6 @@ Board.prototype.draw_shape = function(shape){
 	}
 	return false;
 }
- */
-
-Board.prototype.draw_shape = function(shape){
-	if (this.can_move(0,0)){
-		shape.draw();
-		return true;
-	}
-	return false;
-}
-
 
 
 // En esta parte de la práctica devolveremos siempre 'true'
