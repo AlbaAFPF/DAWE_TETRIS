@@ -335,12 +335,18 @@ Tetris.prototype.create_new_shape = function(){
 	// Crear una instancia de ese tipo de pieza (x = centro del tablero, y = 0)
 	// Devolver la referencia de esa pieza nueva
 
+	/* ORIGINAL
 	// Elegir pieza al azar
 	var randomId = Math.floor(Math.random() * Tetris.SHAPES.length);
 	console.log(randomId)
 	var piezaRandom = Tetris.SHAPES[randomId];
 	// Crear instancia de la pieza al azar
 	var pieza = new piezaRandom(new Point(parseInt(Tetris.BOARD_WIDTH/2), 0));
+	return pieza;
+	 */
+
+	// Modificación para que siempre haga S_Shape
+	var pieza = new S_Shape(new Point(parseInt(Tetris.BOARD_WIDTH/2), 0));
 	return pieza;
 }
 
@@ -380,6 +386,20 @@ Tetris.prototype.key_pressed = function(e) {
 
 	console.log("Character typed: " + key);
 
+	switch (key){
+		case 37:
+			//izq
+			this.do_move('Left');
+			break;
+		case 39:
+			//de
+			this.do_move('Right');
+			break;
+		case 40:
+			//abajo
+			this.do_move('Down');
+			break;
+	}
 
 }
 
@@ -395,9 +415,9 @@ Tetris.prototype.do_move = function(direction) {
 	//Tetris.DIRECTION = {'Left':[-1, 0], 'Right':[1, 0], 'Down':[0, 1]};
 
 
-
-	if (this.current_shape.can_move(Tetris.DIRECTION[direction])){
-		this.current_shape.do_move(direction);
+	var punto = Tetris.DIRECTION[direction];
+	if (this.current_shape.can_move(this.board, punto[0], punto[1])){
+		this.current_shape.move(punto[0], punto[1]);
 	}
 
 }
