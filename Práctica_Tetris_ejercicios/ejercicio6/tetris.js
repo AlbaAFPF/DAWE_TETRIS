@@ -35,6 +35,10 @@ Rectangle.prototype.draw = function() {
 	// Contorno del cuadrado
 	ctx.strokeStyle = "black";
 	ctx.lineWidth = this.lineWidth;
+	/*
+	var desfase = parseInt(this.lineWidth/2);
+	ctx.strokeRect(this.px+desfase, this.py+desfase, this.width-this.lineWidth, this.height-this.lineWidth);
+	 */
 	ctx.strokeRect(this.px, this.py, this.width, this.height);
 }
 
@@ -407,16 +411,20 @@ Tetris.prototype.key_pressed = function(e) {
 
 	switch (key){
 		case 37:
-			//izq
+			// Izquierda
 			this.do_move('Left');
 			break;
 		case 39:
-			//de
+			// Derecha
 			this.do_move('Right');
 			break;
 		case 40:
-			//abajo
+			// Abajo
 			this.do_move('Down');
+			break;
+		case 32:
+			// Barra espaciadora
+			while(this.do_move('Down')){}
 			break;
 	}
 
@@ -435,11 +443,13 @@ Tetris.prototype.do_move = function(direction) {
 	var punto = Tetris.DIRECTION[direction];
 	if (this.current_shape.can_move(this.board, punto[0], punto[1])){
 		this.current_shape.move(punto[0], punto[1]);
+		return true;
 	}
 	
 	/* Código que se pide en el EJERCICIO 6 */
 	// else if(direction=='Down')
 	// TU CÓDIGO AQUÍ: añade la pieza actual al grid. Crea una nueva pieza y dibújala en el tablero.
+
 	else if(direction=='Down'){
 		// Añadir la pieza actual (current_shape) al tablero
 		this.board.add_shape(this.current_shape);
@@ -447,6 +457,7 @@ Tetris.prototype.do_move = function(direction) {
 		this.current_shape = this.create_new_shape();
 		// Dibujar la nueva pieza en el tablero.
 		this.board.draw_shape(this.current_shape);
+		return false;
 	}
 
 }
